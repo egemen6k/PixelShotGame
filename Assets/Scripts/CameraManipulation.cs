@@ -6,9 +6,7 @@ public class CameraManipulation : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 50;
-
     private float _fov = 0;
-
     private Camera _cam;
 
     private void Start()

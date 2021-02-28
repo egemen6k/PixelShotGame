@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     private Text _scoreText;
 
     private Player _player;
-
     private int _points;
     // Start is called before the first frame update
     void Start()

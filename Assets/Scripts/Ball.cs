@@ -6,19 +6,14 @@ public class Ball : MonoBehaviour
 {
     [SerializeField]
     GameObject _explosionPrefab;
-
+    [SerializeField]
+    private Material _mat;
     [SerializeField]
     private AudioClip _explosionSound;
 
     private AudioSource _bouncingSound;
-
     private Rigidbody _rb;
-
-    [SerializeField]
-    private Material _mat;
-
     private UIManager _uiManager;
-
     private bool _scorable = true;
 
     private void Start()
@@ -65,7 +60,6 @@ public class Ball : MonoBehaviour
             if (_mesh != null)
             {
                 _mesh.material = _mat;
-
             }
 
             _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
@@ -73,7 +67,6 @@ public class Ball : MonoBehaviour
             {
                 StartCoroutine(ScoreAndDestroy());
             }
-
         }
     }
 
