@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    ITouchInput TouchInput;
-    IThrow Throw;
-    Touch touch;
+    private ITouchInput TouchInput;
+    private Touch touch;
+    private Rigidbody _rb;
+    public bool _hasThrown = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,16 +18,25 @@ public class BallMovement : MonoBehaviour
             Debug.LogError("TouchInput is null");
         }
 
-
+        _rb = GetComponent<Rigidbody>();
+        if (_rb == null)
+        {
+            Debug.LogError("RB is null");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.touchCount > 0)
+        _rb.velocity = new Vector3(Mathf.Clamp(_rb.velocity.x, -25f, 25f), Mathf.Clamp(_rb.velocity.y, -25f, 25f), 0);  
+        
+        if (!_hasThrown)
         {
-            touch = Input.GetTouch(0);
-            TouchInput.GetTouchInput(touch);
+            if (Input.touchCount > 0)
+            {
+                touch = Input.GetTouch(0);
+                _hasThrown = TouchInput.GetTouchInput(touch,_hasThrown);
+            }
         }
     }
 }

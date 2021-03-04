@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
     {
 
         //Velocity limiting for solving ultra bouncing speed bugs
-        _rb.velocity = new Vector3(Mathf.Clamp(_rb.velocity.x, -25f, 25f), Mathf.Clamp(_rb.velocity.y, -25f, 25f), 0);
+
+        //Debug.Log(_rb.velocity);
     }
 
    
@@ -60,14 +61,14 @@ public class Player : MonoBehaviour
         _rb.velocity = Vector3.zero;
         _rb.isKinematic = true;
         gameObject.transform.position = new Vector3(0, -4, 0);
-        _stick.GetComponent<MeshRenderer>().enabled = true;
+        //_stick.GetComponent<MeshRenderer>().enabled = true;
         StartCoroutine(ActivateTouch());
     }
 
     IEnumerator ActivateTouch()
     {
         yield return new WaitForEndOfFrame();
-        //isShoot = false;
+        GetComponent<BallMovement>()._hasThrown = false;
     }
 
     private void NullCheckProcess()

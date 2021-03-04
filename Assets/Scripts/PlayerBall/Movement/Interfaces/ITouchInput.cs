@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ITouchInput
 {
-    void GetTouchInput(Touch touch);
+    bool GetTouchInput(Touch touch, bool _hasThrown);
 }
