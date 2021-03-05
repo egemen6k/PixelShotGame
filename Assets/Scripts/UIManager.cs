@@ -8,14 +8,17 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _scoreText;
 
-    private Player _player;
+    [SerializeField]
+    private GameObject _playerObj;
+
+    private BallMovement _player;
     private int _points;
     // Start is called before the first frame update
     void Start()
     {
         _scoreText.text = "Score: 0";
 
-        _player = GameObject.Find("Player").GetComponent<Player>();
+        _player = GameObject.Find("Player").GetComponent<BallMovement>();
     }
 
     public void UpdateScore()
@@ -24,13 +27,14 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + _points;
     }
 
-    public void RestartGame()
-    {
-        _player.RestartGame();
-    }
+    //public void RestartGame()
+    //{
+    //    _player.RestartGame();
+    //}
 
     public void NewBall()
     {
-        _player.NewBall();
+        Destroy(GameObject.FindGameObjectWithTag("Player"));
+        Instantiate(_playerObj, new Vector3(0, -4, 0), Quaternion.identity);      
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    private Rigidbody _rb;
     private MeshRenderer _mr;
     private LineRenderer _lr;
     //private Touch touch;
@@ -18,8 +17,8 @@ public class Player : MonoBehaviour
     //private bool isShoot = false;
     //[SerializeField]
     //private float forceMultiplier;
-    [SerializeField]
-    private float _stickSpeedModifier = 0.1f;
+    //[SerializeField]
+    //private float _stickSpeedModifier = 0.1f;
 
     void Start()
     {
@@ -56,29 +55,23 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void NewBall()
-    {
-        _rb.velocity = Vector3.zero;
-        _rb.isKinematic = true;
-        gameObject.transform.position = new Vector3(0, -4, 0);
-        //_stick.GetComponent<MeshRenderer>().enabled = true;
-        StartCoroutine(ActivateTouch());
-    }
+    //public void NewBall()
+    //{
+    //    _rb.velocity = Vector3.zero;
+    //    _rb.isKinematic = true;
+    //    gameObject.transform.position = new Vector3(0, -4, 0);
+    //    //_stick.GetComponent<MeshRenderer>().enabled = true;
+    //    StartCoroutine(ActivateTouch());
+    //}
 
-    IEnumerator ActivateTouch()
-    {
-        yield return new WaitForEndOfFrame();
-        GetComponent<BallMovement>()._hasThrown = false;
-    }
+    //IEnumerator ActivateTouch()
+    //{
+    //    yield return new WaitForEndOfFrame();
+    //    GetComponent<BallMovement>()._hasThrown = false;
+    //}
 
     private void NullCheckProcess()
     {
-        _rb = GetComponent<Rigidbody>();
-        if (_rb != null)
-        {
-            //Starting position
-            _rb.isKinematic = true;
-        }
 
         _mr = GetComponent<MeshRenderer>();
         if (_mr == null)
@@ -86,11 +79,11 @@ public class Player : MonoBehaviour
             Debug.LogError("MR is null");
         }
 
-        _lr = GetComponent<LineRenderer>();
-        if (_lr == null)
-        {
-            Debug.LogError("LR is null");
-        }
+        //_lr = GetComponent<LineRenderer>();
+        //if (_lr == null)
+        //{
+        //    Debug.LogError("LR is null");
+        //}
 
         _launchingSound = GetComponent<AudioSource>();
         if (_launchingSound == null)
