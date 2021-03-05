@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour
 {
-    private ITouchInput TouchInput;
-    private Touch touch;
     private Rigidbody _rb;
     private bool _hasThrown;
 
-    void Start()
+    void OnEnable()
     {
-        TouchInput = GetComponent<ITouchInput>();
-        if (TouchInput == null)
-        {
-            Debug.LogError("TouchInput is null");
-        }
-
         _rb = GetComponent<Rigidbody>();
         if (_rb != null)
         {
+            gameObject.transform.position = new Vector3(0, -4, 0);
             _rb.isKinematic = true;
             _hasThrown = false;
-            _rb.velocity = Vector3.zero;
         }
     }
 
@@ -32,8 +24,13 @@ public class BallMovement : MonoBehaviour
 
         if (!_hasThrown && Input.touchCount > 0)
         {   
-                touch = Input.GetTouch(0);
-                _hasThrown = TouchInput.GetTouchInput(touch,_hasThrown);
+                Touch touch = Input.GetTouch(0);
+
+                ITouchInput TouchInput = GetComponent<ITouchInput>();
+                if (TouchInput != null)
+                {
+                    _hasThrown = TouchInput.GetTouchInput(touch, _hasThrown);
+                }
         }
     }
 }

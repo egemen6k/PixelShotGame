@@ -6,25 +6,21 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    private Text _scoreText;
-
+    private Text _scoreText, _pointsText;
     [SerializeField]
     private GameObject _playerObj;
 
-    private BallMovement _player;
     private int _points;
-    // Start is called before the first frame update
+
     void Start()
     {
-        _scoreText.text = "Score: 0";
-
-        _player = GameObject.Find("Player").GetComponent<BallMovement>();
+        _scoreText.text = "Score: ";
     }
 
     public void UpdateScore()
     {
         _points++;
-        _scoreText.text = "Score: " + _points;
+        _pointsText.text = _points.ToString();
     }
 
     //public void RestartGame()
@@ -34,7 +30,8 @@ public class UIManager : MonoBehaviour
 
     public void NewBall()
     {
-        Destroy(GameObject.FindGameObjectWithTag("Player"));
-        Instantiate(_playerObj, new Vector3(0, -4, 0), Quaternion.identity);      
+        GameObject GameManager = GameObject.FindGameObjectWithTag("GameManager");
+        GameManager.GetComponent<GameManager>().NewBall();
     }
+
 }
