@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITouchInput
+public interface ICollision
 {
-    Vector3 GetTouchInput();
+    bool onPlayer();
+    bool onBall();
 }
